@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viaductos Javier Prado</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0c0d0f;
+    --surface:  #13151a;
+    --border:   #222530;
+    --border2:  #2e3340;
+    --text:     #e8eaf0;
+    --text2:    #8b90a0;
+    --text3:    #50556a;
+    --gold:     #c9a84c;
+    --gold2:    #e8c96a;
+    --blue:     #4a7fd4;
+    --blue2:    #7aadde;
+    --line:     #191c28;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; min-height: 100vh; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+  }
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .header-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  header h1 em { font-style: italic; color: var(--gold); }
+
+  /* ── TABS ── */
+  .tabs {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+  }
+  .tabs-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+  .tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 24px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--text2); }
+  .tab.active-b { color: var(--blue2); border-bottom-color: var(--blue2); }
+  .tab.active-p { color: var(--gold2); border-bottom-color: var(--gold2); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── PROJECT CARD ── */
+  .project-header {
+    border-left: 3px solid var(--blue2);
+    padding-left: 16px;
+    margin-bottom: 48px;
+  }
+  .project-header.pershing { border-left-color: var(--gold2); }
+  .ph-cui  { font-size: 10px; letter-spacing: 0.2em; color: var(--text); text-transform: uppercase; margin-bottom: 4px; font-weight: 500; }
+  .ph-name { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 900; margin-bottom: 4px; }
+  .project-header .ph-name { color: var(--blue2); }
+  .project-header.pershing .ph-name { color: var(--gold2); }
+  .ph-sub  { font-size: 12px; color: var(--text); letter-spacing: 0.05em; font-weight: 500; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 90px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item {
+    display: flex;
+    margin-bottom: 4px;
+  }
+  .tl-date-col {
+    width: 90px;
+    flex-shrink: 0;
+    padding-top: 20px;
+    padding-right: 20px;
+    text-align: right;
+  }
+  .tl-date {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 500;
+  }
+  .tl-dot-col {
+    width: 0;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .tl-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    margin-top: 24px;
+    position: relative;
+    z-index: 1;
+    left: -4.5px;
+    flex-shrink: 0;
+  }
+  .dot-b { background: var(--blue2); }
+  .dot-p { background: var(--gold2); }
+
+  .tl-content-col {
+    flex: 1;
+    padding: 12px 0 12px 24px;
+  }
+  .tl-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    transition: border-color 0.15s;
+  }
+  .tl-card:hover { border-color: var(--border2); }
+
+  .tl-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .tl-tipo {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .tipo-b { background: rgba(74,127,212,0.15); color: var(--blue2); }
+  .tipo-p { background: rgba(201,168,76,0.15);  color: var(--gold2); }
+
+  .tl-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+    flex: 1;
+  }
+  .tl-desc {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .tl-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .tl-meta span {
+    font-size: 12px;
+    color: var(--text3);
+  }
+  .tl-meta span strong {
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .tl-meta span.monto strong {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .doc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    text-decoration: none;
+    background: #1a1d24;
+    cursor: default;
+    pointer-events: none;
+  }
+  .doc-btn.ready {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: #000;
+    cursor: pointer;
+    pointer-events: all;
+    transition: background 0.15s;
+  }
+  .doc-btn.ready:hover { background: var(--gold2); border-color: var(--gold2); }
+  .doc-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+  /* ── PANEL HIDDEN ── */
+  .panel { display: none; }
+  .panel.visible { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    header, .tabs { padding-left: 16px; padding-right: 16px; }
+    main { padding: 32px 16px 60px; }
+    .timeline::before { left: 0; }
+    .tl-date-col { display: none; }
+    .tl-dot { left: -4.5px; }
+    .tl-content-col { padding-left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-label">INVERMET · Municipalidad Metropolitana de Lima</div>
+    <h1>Viaductos <em>Javier Prado</em></h1>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <button class="tab active-b" data-panel="begonias">Begonias</button>
+    <button class="tab" data-panel="pershing">Pershing</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- ══ BEGONIAS ══ -->
+  <div class="panel visible" id="panel-begonias">
+    <div class="project-header">
+      <div class="ph-cui">CUI 2689695</div>
+      <div class="ph-name">Viaducto Begonias</div>
+      <div class="ph-sub">Distrito de Lince · Calle Las Begonias – Av. Arenales</div>
+    </div>
+    <div class="timeline" id="tl-begonias"></div>
+  </div>
+
+  <!-- ══ PERSHING ══ -->
+  <div class="panel" id="panel-pershing">
+    <div class="project-header pershing">
+      <div class="ph-cui">CUI 2690617</div>
+      <div class="ph-name">Viaducto Pershing</div>
+      <div class="ph-sub">Distrito de San Isidro · Av. Javier Prado / Av. Sánchez Carrión</div>
+    </div>
+    <div class="timeline" id="tl-pershing"></div>
+  </div>
+
+</main>
+
+<script>
+// ============================================================
+// DATOS — extraídos estrictamente del Excel PROYECTO_VIADUCTOS.xlsx
+// Para activar un link: cambiar null por la URL de Google Drive.
+// ============================================================
+
+const BEGONIAS = [
+  {
+    fecha: "03/05/2024",
+    titulo: "Registro de Idea — Formato 5A",
+    desc: "Registro de la idea de inversión (Formato 5A). Código 316788.",
+    monto: "S/ 193,435,647.23",
+    ref: "Código 316788",
+    archivo: "https://drive.google.com/file/d/19uqezwiZ3Oy8PS664JM0ApQmg6-bqpJe/view?usp=drive_link"
+  },
+  {
+    fecha: "18/12/2024",
+    titulo: "Contrato de elaboración de perfil",
+    desc: "Contrato con INTECONSULT SAC para la elaboración del perfil de inversión.",
+    monto: "S/ 425,300.00",
+    ref: null,
+    archivo: "https://drive.google.com/file/d/19cB0g9OUaAZ4uCvK5RGxZHrkKmbV9b6x/view?usp=drive_link"
+  },
+  {
+    fecha: "18/12/2024",
+    titulo: "Resumen ejecutivo del perfil",
+    desc: "Resumen ejecutivo del perfil de inversión elaborado por INTECONSULT SAC.",
+    monto: null,
+    ref: null,
+    archivo: "https://drive.google.com/file/d/1T3DBSleeSNNHqlNHBIZtCzJPgdSkFzhe/view?usp=drive_link"
+  },
+  {
+    fecha: "11/04/2025",
+    titulo: "Viabilidad del proyecto — Ficha 7A",
+    desc: "Viabilidad del CUI 2689695: \"Creación del servicio de movilidad urbana en un (01) paso a desnivel elevado (puente vehicular) en el eje vial Av. Javier Prado tramo Calle Las Begonias – Av. Arenales, distrito de Lince.\"",
+    monto: null,
+    ref: "CUI 2689695",
+    archivo: "https://drive.google.com/file/d/1CtNhAE5WbHxTJBY1pyiEp-A7VZzKPeXq/view?usp=drive_link"
+  },
+  {
+    fecha: "16/04/2025",
+    titulo: "Convocatoria a licitación — Expediente técnico y ejecución de obra",
+    desc: "Proceso LP-SM-3-2025-INVERMET-1 convocado por INVERMET.",
+    monto: "S/ 236,390,158.24",
+    ref: "LP-SM-3-2025-INVERMET-1",
+    archivo: null
+  },
+  {
+    fecha: "11/07/2025",
+    titulo: "Buena Pro — Consorcio Viaducto Begonias",
+    desc: "Buena Pro otorgada al Consorcio Viaducto Begonias: China Civil Engineering Construction Corporation (CCECC) Sucursal del Perú + China Railway First Survey & Design Institute Group Co. Ltd. Sucursal del Perú.",
+    monto: null,
+    ref: null,
+    archivo: "https://drive.google.com/file/d/13bU5fHHhih9YlTzKDAJ2JyiNG0pPYAUl/view?usp=drive_link"
+  },
+  {
+    fecha: "08/09/2025",
+    titulo: "Firma de contrato de obra",
+    desc: "Contrato N° 000275-2025-INVERMET-OGAF suscrito con el Consorcio Viaducto Begonias para la elaboración del expediente técnico y ejecución de obra.",
+    monto: "S/ 224,533,399.00",
+    ref: "N° 000275-2025-INVERMET-OGAF",
+    archivo: "https://drive.google.com/file/d/1qsyP4o29thxyez68fq1MK_w4nFzbJa4k/view?usp=drive_link"
+  },
+  {
+    fecha: "14/11/2025",
+    titulo: "Convocatoria concurso público — Supervisión",
+    desc: "Proceso CP CON-SM-2-2025-INVERMET-CE-1 para la supervisión del expediente técnico y obra.",
+    monto: null,
+    ref: "CP CON-SM-2-2025-INVERMET-CE-1",
+    archivo: null
+  },
+  {
+    fecha: "24/11/2025",
+    titulo: "Buena Pro supervisión — Consorcio Supervisor Puentes Las Begonias",
+    desc: "Buena Pro otorgada al Consorcio Supervisor Puentes Las Begonias: MAB Ingeniería de Valor S.A. Sucursal del Perú + H Y C Ingenieros Consultores S.A.C.",
+    monto: null,
+    ref: null,
+    archivo: "https://drive.google.com/file/d/1IO581UN5PjDfLiJl0PK0IJB9utuS2IOR/view?usp=drive_link"
+  },
+  {
+    fecha: "07/01/2026",
+    titulo: "Firma de contrato de supervisión",
+    desc: "Contrato N° 000001-2026-INVERMET-OGAF suscrito con el Consorcio Supervisor Puentes Las Begonias (MAB Ingeniería de Valor S.A. + H Y C Ingenieros Consultores S.A.C.).",
+    monto: "S/ 9,552,065.76",
+    ref: "N° 000001-2026-INVERMET-OGAF",
+    archivo: "https://drive.google.com/file/d/1onAt-70E3HLogYUHTUEIh6Pht_ODeZLA/view?usp=drive_link"
+  }
+];
+
+const PERSHING = [
+  {
+    fecha: "22/12/2023",
+    titulo: "Registro de Idea — Formato 5A",
+    desc: "Registro de la idea de inversión (Formato 5A). Código 288666.",
+    monto: "S/ 247,028,485.79",
+    ref: "Código 288666",
+    archivo: "https://drive.google.com/file/d/1IwSG9QgbcgtxltzInWrE4SBB67tbuvQg/view?usp=drive_link"
+  },
+  {
+    fecha: "18/12/2024",
+    titulo: "Contrato de elaboración de perfil",
+    desc: "Contrato N° 000182-2024-OGAF con el Consorcio Innova (RUC 20520884298) para la elaboración del perfil de inversión.",
+    monto: "S/ 425,300.00",
+    ref: "CONTRATO-000182-2024-OGAF",
+    archivo: "https://drive.google.com/file/d/1QOwlWHvuXdj10ZHx2igeclOK1rf4zNCE/view?usp=drive_link"
+  },
+  {
+    fecha: "15/04/2025",
+    titulo: "Viabilidad del proyecto — Formato 7A",
+    desc: "Viabilidad del CUI 2690617: \"Creación del servicio de movilidad urbana en un (01) paso a desnivel elevado (puente vehicular) en la intersección de la Av. Javier Prado y Av. Sánchez Carrión, tramo Calle Los Eucaliptos hasta el Jr. Caracas, distrito de San Isidro.\"",
+    monto: null,
+    ref: "CUI 2690617",
+    archivo: "https://drive.google.com/file/d/1TEM9Ha3oOJWJnGWesZn1DHNkeNWcXrfF/view?usp=drive_link"
+  },
+  {
+    fecha: "16/04/2025",
+    titulo: "Convocatoria a licitación — Expediente técnico y ejecución de obra",
+    desc: "Proceso LP-SM-10-2025-INVERMET-CE-1 convocado por INVERMET.",
+    monto: null,
+    ref: "LP-SM-10-2025-INVERMET-CE-1",
+    archivo: null
+  },
+  {
+    fecha: "16/12/2025",
+    titulo: "Buena Pro — Consorcio San Felipe",
+    desc: "Buena Pro otorgada al Consorcio San Felipe: Benito Roggio e Hijos S.A. Sucursal del Perú + Ingeniería Medioambiente & Construcción S.A.C. (IMC) + INYPSA CW Infraestructures SLU Sucursal del Perú.",
+    monto: null,
+    ref: null,
+    archivo: "https://drive.google.com/file/d/1Nc4ctRo6qzo5QD1_kHq3D7Pp7gaSZ_rF/view?usp=drive_link"
+  },
+  {
+    fecha: "23/12/2025",
+    titulo: "Buena Pro supervisión — Consorcio Supervisor Javier Prado",
+    desc: "Buena Pro otorgada al Consorcio Supervisor Javier Prado (RUC 20600366948) para la supervisión del expediente técnico y obra.",
+    monto: null,
+    ref: "CP-SM-7-2025-INVERMET--1",
+    archivo: "https://drive.google.com/file/d/1RnzbYv4iYuFRh8trp_HwzhXkkvTZRwBr/view?usp=drive_link"
+  },
+  {
+    fecha: "23/12/2025",
+    titulo: "Firma de contrato de supervisión",
+    desc: "Contrato de supervisión suscrito con el Consorcio Supervisor Javier Prado (RUC 20600366948). Proceso CP-SM-7-2025-INVERMET--1. Vigencia hasta el 30/11/2027.",
+    monto: "S/ 10,520,433.46",
+    ref: "CP-SM-7-2025-INVERMET--1",
+    archivo: "https://drive.google.com/file/d/1Wq42lR18p8FdniGVB2jFhKpJFg_w5EpN/view?usp=drive_link"
+  },
+  {
+    fecha: "19/01/2026",
+    titulo: "Firma de contrato de obra",
+    desc: "Contrato suscrito con el Consorcio San Felipe (Benito Roggio e Hijos S.A. + IMC + INYPSA CW Infraestructures SLU) para la elaboración del expediente técnico y ejecución de obra. Vigencia hasta el 28/01/2028.",
+    monto: "S/ 246,417,533.30",
+    ref: null,
+    archivo: "https://drive.google.com/file/d/1m9l1Xf0PlzRLBhHSYJcUfsSJK7Upt6f9/view?usp=drive_link"
+  }
+];
+
+// ── Render ──────────────────────────────────────────────────
+
+const DL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+
+function parseFecha(s){ const [d,m,y]=s.split('/').map(Number); return new Date(y,m-1,d); }
+
+function buildTimeline(eventos, containerId, color) {
+  const sorted = [...eventos].sort((a,b) => parseFecha(a.fecha) - parseFecha(b.fecha));
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+
+  sorted.forEach(ev => {
+    const [d,m,y] = ev.fecha.split('/');
+
+    let meta = '';
+    if (ev.monto) meta += `<span class="monto"><strong>Monto:</strong> ${ev.monto}</span>`;
+    if (ev.ref)   meta += `<span><strong>Ref.:</strong> ${ev.ref}</span>`;
+    if (meta) meta = `<div class="tl-meta">${meta}</div>`;
+
+    const btn = ev.archivo
+      ? `<a class="doc-btn ready" href="${ev.archivo}" target="_blank" rel="noopener">${DL} Descargar archivo</a>`
+      : ``;
+
+    const item = document.createElement('div');
+    item.className = 'tl-item';
+    item.innerHTML = `
+      <div class="tl-date-col"><div class="tl-date">${d}/${m}<br>${y}</div></div>
+      <div class="tl-dot-col"><div class="tl-dot dot-${color}"></div></div>
+      <div class="tl-content-col">
+        <div class="tl-card">
+          <div class="tl-card-top">
+            <span class="tl-tipo tipo-${color}">${d}/${m}/${y}</span>
+            <div class="tl-title">${ev.titulo}</div>
+          </div>
+          <div class="tl-desc">${ev.desc}</div>
+          ${meta}
+          ${btn}
+        </div>
+      </div>`;
+    container.appendChild(item);
+  });
+}
+
+buildTimeline(BEGONIAS, 'tl-begonias', 'b');
+buildTimeline(PERSHING,  'tl-pershing',  'p');
+
+// ── Tabs ────────────────────────────────────────────────────
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const which = tab.dataset.panel;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active-b','active-p'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+    tab.classList.add(which === 'begonias' ? 'active-b' : 'active-p');
+    document.getElementById('panel-' + which).classList.add('visible');
+  });
+});
+</script>
+
+<!-- ── WHATSAPP BANNER ── -->
+<div style="background:#0c0d0f; border-top:1px solid #222530; padding: 24px 32px;">
+  <div style="max-width:960px; margin:0 auto;">
+    <a href="https://chat.whatsapp.com/F3Otg9JdFDMGwVlOBGUnSt" target="_blank" rel="noopener"
+       style="display:inline-flex; align-items:center; gap:16px; background:#111316; border:1px solid #2a2d38; padding:14px 24px; text-decoration:none; transition:border-color 0.15s;"
+       onmouseover="this.style.borderColor='#25D366'" onmouseout="this.style.borderColor='#2a2d38'">
+      <!-- WhatsApp icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="44" height="44">
+        <circle cx="24" cy="24" r="24" fill="#25D366"/>
+        <path fill="#fff" d="M24 10.5C16.54 10.5 10.5 16.54 10.5 24c0 2.96.87 5.71 2.36 8.02L10.5 37.5l5.68-1.83A13.44 13.44 0 0 0 24 37.5c7.46 0 13.5-6.04 13.5-13.5S31.46 10.5 24 10.5zm6.56 18.67c-.28.78-1.63 1.5-2.24 1.55-.57.05-1.1.27-3.7-.77-3.1-1.23-5.08-4.4-5.24-4.6-.16-.2-1.28-1.7-1.28-3.25s.82-2.3 1.1-2.62c.28-.3.62-.38.82-.38l.6.01c.19 0 .46-.07.72.55.28.66.94 2.3.02 1.03.14.24-.09.38-.22.54-.13.16-.28.36-.4.48-.13.13-.27.27-.12.53.16.26.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.16 1.34.26.13.42.11.57-.07.16-.19.66-.77.84-1.03.18-.27.36-.22.6-.13.25.09 1.57.74 1.84.87.27.13.45.2.52.3.07.12.07.66-.2 1.44z"/>
+      </svg>
+      <div style="border-left:1px solid #2a2d38; padding-left:16px;">
+        <div style="font-family:'DM Mono',monospace; font-size:13px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#ffffff; margin-bottom:3px;">Ciudadanía Informada SI</div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:#25D366; letter-spacing:0.05em;">chat.whatsapp.com/F3Otg9JdFDMGwVlOBGUnSt</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
