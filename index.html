@@ -100,6 +100,7 @@
   .tab:hover { border-color: var(--text2); color: var(--text); }
   .tab.active-b { background: #2e3340; border-color: #4a4f62; color: #ffffff; font-weight: 700; }
   .tab.active-p { background: #2e3340; border-color: #4a4f62; color: #ffffff; font-weight: 700; }
+  .tab.active-g { background: #2e3340; border-color: #4a4f62; color: #ffffff; font-weight: 700; }
 
   /* ── MAIN ── */
   main {
@@ -259,6 +260,63 @@
   .doc-btn.ready:hover { background: var(--gold2); border-color: var(--gold2); }
   .doc-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
 
+
+  /* ── ANÁLISIS DEL PERFIL ── */
+  .perfil-section {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 2px solid var(--border2);
+  }
+  .perfil-section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .perfil-section-sub {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    margin-bottom: 32px;
+  }
+  .pf-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid #d94f4f;
+    padding: 20px 22px;
+    margin-bottom: 12px;
+    transition: border-color 0.15s;
+  }
+  .pf-card:hover { border-color: var(--border2); border-left-color: #d94f4f; }
+  .pf-card.conclusion {
+    border-left-color: var(--gold);
+    background: rgba(201,168,76,0.04);
+  }
+  .pf-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #d97b4f;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .pf-label.concl { color: var(--gold); }
+  .pf-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .pf-analysis {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.85;
+    margin-bottom: 14px;
+  }
+
   /* ── PANEL HIDDEN ── */
   .panel { display: none; }
   .panel.visible { display: block; }
@@ -299,6 +357,7 @@
   <div class="tabs-inner">
     <button class="tab active-b" data-panel="begonias">Begonias</button>
     <button class="tab" data-panel="pershing">Pershing</button>
+    <button class="tab" data-panel="gestiones">Gestiones del Colectivo</button>
   </div>
 </div>
 
@@ -312,6 +371,12 @@
       <div class="ph-sub">Distrito de Lince · Calle Las Begonias – Av. Arenales</div>
     </div>
     <div class="timeline" id="tl-begonias"></div>
+
+    <div class="perfil-section">
+      <div class="perfil-section-title">Análisis del Perfil de Inversión</div>
+      <div class="perfil-section-sub">Hallazgos documentados con respaldo en los tomos del expediente técnico</div>
+      <div id="perfil-begonias"></div>
+    </div>
   </div>
 
   <!-- ══ PERSHING ══ -->
@@ -322,8 +387,24 @@
       <div class="ph-sub">Distrito de San Isidro · Av. Javier Prado / Av. Sánchez Carrión</div>
     </div>
     <div class="timeline" id="tl-pershing"></div>
+
+    <div class="perfil-section">
+      <div class="perfil-section-title">Análisis del Perfil de Inversión</div>
+      <div class="perfil-section-sub">Hallazgos documentados con respaldo en los tomos del expediente técnico</div>
+      <div id="perfil-pershing"></div>
+    </div>
   </div>
 
+
+  <!-- ══ GESTIONES ══ -->
+  <div class="panel" id="panel-gestiones">
+    <div class="project-header" style="border-left-color:#8a6fd4;">
+      <div class="ph-cui" style="color:var(--text);">COLECTIVO CIUDADANÍA INFORMADA SI</div>
+      <div class="ph-name" style="color:#b09de8;">Gestiones del Colectivo</div>
+      <div class="ph-sub">Reuniones, participaciones y acciones ante organismos</div>
+    </div>
+    <div class="timeline" id="tl-gestiones"></div>
+  </div>
 </main>
 
 <script>
@@ -535,10 +616,302 @@ document.querySelectorAll('.tab').forEach(tab => {
     const which = tab.dataset.panel;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active-b','active-p'));
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
-    tab.classList.add(which === 'begonias' ? 'active-b' : 'active-p');
+    tab.classList.add(which === 'begonias' ? 'active-b' : which === 'pershing' ? 'active-p' : 'active-g');
     document.getElementById('panel-' + which).classList.add('visible');
   });
 });
+
+// ── GESTIONES DEL COLECTIVO ─────────────────────────────────
+const GESTIONES = [
+  {
+    fecha: "24/09/2025",
+    lugar: "MSI Olivar",
+    organismo: "MSI",
+    funcionario: "Alcaldesa y funcionarios",
+    tema: "Solicitud presencial y carta al MSI solicitando socialización",
+    documento: "Carta al MSI solicitando socialización",
+    archivo: "https://drive.google.com/file/d/1MJaa6ctdBvj96Cn8SjYoLxV8ZNerfMA-/view?usp=drive_link",
+    archivo2: "https://drive.google.com/file/d/1tLJEdyzX8I0ybMSwk9ZquKrQPK9NIKjN/view?usp=drive_link",
+    doc2: "PPT de la MSI"
+  },
+  {
+    fecha: "15/10/2025",
+    lugar: "Swiss Hotel",
+    organismo: "INVERMET / MSI",
+    funcionario: "Funcionarios de INVERMET y contratista de Begonias",
+    tema: "Presentación del proyecto Begonias (solo expuso el contratista)",
+    documento: "Lista de preguntas formuladas a INVERMET",
+    archivo: "https://drive.google.com/file/d/1O9sISuo9Vax0XRDQbpcm_EhS4m9ftp6X/view?usp=drive_link"
+  },
+  {
+    fecha: "20/11/2025",
+    lugar: "Nueva Acrópolis",
+    organismo: "INVERMET / TYPSA",
+    funcionario: "ANULADO",
+    tema: "ANULADO: queja por aforo de 80 personas",
+    documento: null,
+    archivo: null
+  },
+  {
+    fecha: "15/12/2025",
+    lugar: "Local GR",
+    organismo: "INVERMET / ECR",
+    funcionario: "Personal de INVERMET ECR y 1 representante de ATU",
+    tema: "Exposición del proyecto, preguntas no respondidas, pocas personas, plantón en los exteriores. Se registra un acta donde no registran todas las preguntas ni respuestas",
+    documento: null,
+    archivo: null
+  },
+  {
+    fecha: "17/12/2025",
+    lugar: "Colegio San Agustín",
+    organismo: "INVERMET / TYPSA",
+    funcionario: "ANULADO",
+    tema: "ANULADO: a pedido de INVERMET debido a los eventos del 15",
+    documento: null,
+    archivo: null
+  },
+  {
+    fecha: "07/01/2026",
+    lugar: "MSI Tamayo",
+    organismo: "MSI",
+    funcionario: "Alcaldesa y funcionarios",
+    tema: "Indicar que está buscando apoyarnos logrando reunión con Reggiardo que regresa de Europa (asistieron 3 vecinos)",
+    documento: null,
+    archivo: null
+  },
+  {
+    fecha: "21/01/2026",
+    lugar: "Colegio San Agustín",
+    organismo: "INVERMET / TYPSA",
+    funcionario: "Funcionarios INVERMET (muchos) / TYPSA (muchos)",
+    tema: "Exposición del proyecto. Vecinos preguntaron y objetaron oponiéndose al proyecto",
+    documento: "Folleto INVERMET",
+    archivo: null
+  },
+  {
+    fecha: "26/01/2026",
+    lugar: "Swiss Hotel",
+    organismo: "INVERMET / MSI",
+    funcionario: "INVERMET no se presentó",
+    tema: "El grupo expuso PPT con preguntas",
+    documento: "PDF de preguntas",
+    archivo: "https://drive.google.com/file/d/1q6uxo3ATa9JY9i7GeOVDBZiCZg6IiIC_/view?usp=drive_link"
+  },
+  {
+    fecha: "03/02/2026",
+    lugar: "MSI Tamayo",
+    organismo: "MSI",
+    funcionario: "Alcaldesa y funcionarios",
+    tema: "Indicar que está buscando apoyarnos logrando reunión con Reggiardo (asistieron 4 vecinas)",
+    documento: null,
+    archivo: null
+  },
+  {
+    fecha: "10/02/2026",
+    lugar: "Municipalidad de Lima",
+    organismo: "MML / INVERMET / MSI",
+    funcionario: "Reggiardo, Nancy V., Gerente de INVERMET, Gerente de la MML y otros funcionarios con 6 vecinos de San Isidro",
+    tema: "Se expuso la maqueta conceptual de Cañón Urbano",
+    documento: "Se entregaron las preguntas del 26 de enero con agregado",
+    archivo: "https://drive.google.com/file/d/1q6uxo3ATa9JY9i7GeOVDBZiCZg6IiIC_/view?usp=drive_link"
+  },
+  {
+    fecha: "26/03/2026",
+    lugar: "INVERMET Lima",
+    organismo: "INVERMET / MSI",
+    funcionario: "GG INVERMET, técnicos INVERMET, Alcaldesa MSI y sus técnicos, 6 vecinos del distrito",
+    tema: "INVERMET realizó exposición. Vecinos y MSI cuestionaron los puntos expuestos. Se indicó la conformación de comisión.",
+    documento: "Informe a vecinos en chat Ciudadanía Informada",
+    archivo: "https://drive.google.com/file/d/1p6GwA9wyVbxtW05tVKVU2GnYSoOD3p0U/view?usp=drive_link"
+  }
+];
+
+const DL_G = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+
+function buildGestiones() {
+  const sorted = [...GESTIONES].sort((a,b) => parseFecha(a.fecha) - parseFecha(b.fecha));
+  const container = document.getElementById('tl-gestiones');
+  container.innerHTML = '';
+
+  sorted.forEach(ev => {
+    const [d,m,y] = ev.fecha.split('/');
+
+    let meta = '';
+    if (ev.lugar)      meta += `<span><strong>Lugar:</strong> ${ev.lugar}</span>`;
+    if (ev.organismo)  meta += `<span><strong>Organismo:</strong> ${ev.organismo}</span>`;
+    if (ev.funcionario) meta += `<span><strong>Funcionarios:</strong> ${ev.funcionario}</span>`;
+    if (meta) meta = `<div class="tl-meta">${meta}</div>`;
+
+    let docHtml = '';
+    let btns = '';
+    if (ev.archivo)  btns += `<a class="doc-btn ready" href="${ev.archivo}"  target="_blank" rel="noopener">${DL_G} ${ev.documento || 'Descargar archivo'}</a>`;
+    if (ev.archivo2) btns += `<a class="doc-btn ready" href="${ev.archivo2}" target="_blank" rel="noopener">${DL_G} ${ev.doc2 || 'Documento 2'}</a>`;
+    if (btns) docHtml = `<div style="display:flex;gap:8px;flex-wrap:wrap;">${btns}</div>`;
+
+    const item = document.createElement('div');
+    item.className = 'tl-item';
+    item.innerHTML = `
+      <div class="tl-date-col"><div class="tl-date">${d}/${m}<br>${y}</div></div>
+      <div class="tl-dot-col"><div class="tl-dot" style="background:#8a6fd4;"></div></div>
+      <div class="tl-content-col">
+        <div class="tl-card">
+          <div class="tl-card-top">
+            <span class="tl-tipo" style="background:rgba(138,111,212,0.15);color:#b09de8;">${ev.organismo}</span>
+            <div class="tl-title">${ev.tema}</div>
+          </div>
+          ${meta}
+          ${ev.documento ? `<div class="tl-desc" style="border-left:2px solid #2e3340;padding-left:10px;margin-bottom:10px;"><strong style="color:var(--text2);">Documento:</strong> ${ev.documento}</div>` : ''}
+          ${docHtml}
+        </div>
+      </div>`;
+    container.appendChild(item);
+  });
+}
+
+buildGestiones();
+
+
+// ── ANÁLISIS DEL PERFIL ─────────────────────────────────────
+
+const PERFIL_BEGONIAS = [
+  {
+    titulo: "Tráfico: los datos descartan el proyecto",
+    analisis: "El propio estudio registra 41,934 vehículos en 16 horas en Av. Javier Prado. Según el Highway Capacity Manual —el manual internacional que el mismo perfil cita— este volumen corresponde a una avenida urbana manejable con gestión de intersecciones y semaforización. No justifica una obra elevada de S/ 269 millones. El perfil tiene los datos que descartan su propia solución.",
+    archivo: "https://drive.google.com/file/d/1bk8RNYhHHhkY7OEtPZ-pPGQ4gOLHn60L/view?usp=drive_link"
+  },
+  {
+    titulo: "Estudio ambiental de otra avenida (Av. Canadá)",
+    analisis: "El estudio ambiental evalúa impactos de ruido, vibraciones y paisaje visual para pasos a desnivel ubicados en la Av. Canadá — que no es el área de intervención del proyecto Begonias. Esto confirma que secciones completas del estudio fueron copiadas de otro proyecto sin adaptarse al área real. Una evaluación ambiental de otra vía no tiene validez legal para certificar este proyecto.",
+    archivo: "https://drive.google.com/file/d/1Ig-Rebv45gkoZ2F3mo-G9kdrccfo8MyO/view?usp=drive_link",
+    archivo2: "https://drive.google.com/file/d/1LGscUeJPGIjyWB5UmOJS9H7NOWOWr08a/view?usp=drive_link"
+  },
+  {
+    titulo: "Marco Lógico: fines inmobiliarios y demanda inducida",
+    analisis: "El Marco Lógico incluye como indicadores de éxito: (a) incremento de 10% en tráfico vehicular — confesión explícita de demanda inducida, que agrava la congestión — y (b) revalorización de propiedades privadas como fin del proyecto. Ninguno de los dos es un objetivo legítimo de inversión pública en movilidad. El proyecto no puede incrementar el tráfico y reducir la congestión simultáneamente.",
+    archivo: "https://drive.google.com/file/d/1-GlHtrd9c5wMl--FJmiEchNO4jFfC1Qs/view?usp=drive_link"
+  },
+  {
+    titulo: "Diagnóstico territorial del distrito de Ate",
+    analisis: "El análisis de centros atractores describe el distrito de Ate y la Av. Nicolás Ayllón–Carretera Central como área de influencia — a más de 10 km del proyecto. Los núcleos económicos identificados no tienen ninguna relación con el tramo Begonias–Arenales en Lince. El diagnóstico fue copiado de otro estudio y no corresponde al área real del proyecto.",
+    archivo: "https://drive.google.com/file/d/1foc9AoTc7zinhF9YQCq97BWhkEwUq-92/view?usp=drive_link",
+    archivo2: "https://drive.google.com/file/d/1zdgAvjki9-hU7Fx6VGXJE_bjmcXn7G_7/view?usp=drive_link"
+  },
+  {
+    titulo: "Respaldo vecinal declarado sin sustento",
+    analisis: "El perfil declara que "el proyecto ha generado una respuesta favorable y positiva de los residentes del distrito." Esto es falso y verificable: más de 4,070 ciudadanos firmaron en contra, se realizaron plantones masivos, y la propia alcaldesa de San Isidro se opuso públicamente. Adicionalmente aparece el Ministerio de Vivienda como actor involucrado — institución sin competencia en proyectos viales metropolitanos.",
+    archivo: "https://drive.google.com/file/d/1bhp7yw6rUQrc-1HgvvOpiYVUpbOg2HJI/view?usp=drive_link"
+  },
+  {
+    titulo: "San Miguel incluido como beneficiario sin relación con el tramo",
+    analisis: "El perfil identifica a la Municipalidad de San Miguel como entidad pública involucrada y beneficiaria directa. San Miguel no colinda con el tramo Begonias–Arenales en Lince. Su inclusión confirma que la sección de involucrados fue copiada de otro estudio —probablemente de un proyecto en el eje Javier Prado Oeste— sin revisar ni adaptar.",
+    archivo: "https://drive.google.com/file/d/1GZlfTBXUoPAl_QS_0IQLSJPhWWLPCfXT/view?usp=drive_link"
+  },
+  {
+    titulo: "Mejora de imagen urbanística como fin: revalorización inmobiliaria",
+    analisis: "Entre los fines directos del proyecto figura "mejora de la imagen urbanística", cuyo fin indirecto es "recuperación del valor del predio residencial." Un proyecto de inversión pública en movilidad no puede tener como finalidad la revalorización de inmuebles privados. Esto revela que el proyecto sirve intereses inmobiliarios, no al ciudadano que se mueve en transporte público.",
+    archivo: "https://drive.google.com/file/d/1zeV8SXcQJJ6rrHwNNDRMNkipl8pCUHiv/view?usp=drive_link"
+  },
+  {
+    titulo: "Alternativas descartadas sin evaluación real",
+    analisis: "El perfil descarta la solución de superficie antes de evaluarla, definiéndola de antemano como "sin gastos significativos." Una solución de rediseño geométrico + semaforización coordinada —que puede costar ~S/ 5 millones— nunca fue analizada como alternativa real. En cambio se optó por un viaducto de S/ 269 millones. Eso no es una evaluación de alternativas: es una conclusión buscando justificación.",
+    archivo: "https://drive.google.com/file/d/1AdSZeFXSl9Aw_Wjjv7s6IXMYQAnrp9bV/view?usp=drive_link"
+  },
+  {
+    titulo: "HCM: citan la herramienta pero ignoran sus conclusiones",
+    analisis: "El perfil aplica el HCM (Highway Capacity Manual) para calcular niveles de servicio. Los propios parámetros del HCM indican que volúmenes del orden de 38,000–59,000 veh/día son manejables con gestión semafórica y rediseño de intersecciones. El estudio cita la herramienta correcta pero ignora sus conclusiones para justificar la solución más cara.",
+    archivo: "https://drive.google.com/file/d/1VfYW2jSjf-8j1rszfZQ71qDrO0q9bj_Z/view?usp=drive_link"
+  },
+  {
+    titulo: "ATU: viabilidad otorgada sin opinión técnica vinculante",
+    analisis: "La ATU concluye expresamente que el titular del proyecto debe remitir el estudio de preinversión a la ATU para que emita opinión técnica vinculante antes de la declaratoria de viabilidad. Este documento, fechado en febrero de 2025 con firma digital verificable, prueba que la viabilidad se otorgó sin cumplir ese requisito legal. Según la Ley N.° 30900: sin opinión favorable de la ATU, el proyecto es nulo de pleno derecho.",
+    archivo: "https://drive.google.com/file/d/1-Di9A3Pn2QJ2X7fPzHnJhzsZetA-YUqb/view?usp=drive_link"
+  },
+  {
+    titulo: "Brecha oferta-demanda analizada en Ate, no en Lince",
+    analisis: "La sección de brecha oferta-demanda analiza la congestión en la intersección de Av. Nicolás Ayllón y Av. Estrella —en el distrito de Ate— como justificación para el viaducto Begonias en Lince. Son dos corredores distintos, en distritos distintos, con dinámicas de tráfico distintas. El análisis que sustenta la inversión de S/ 269 millones no corresponde al área donde se construiría.",
+    archivo: "https://drive.google.com/file/d/1GvMv_DufYVK5tQRLz1j91LtqIVbniUYu/view?usp=drive_link"
+  },
+  {
+    titulo: "Cambio de nombre: de «viaducto» a «Nueva Vía Rápida»",
+    analisis: "Los proyectos CUI 2689695 y CUI 2690617 se identifican en el sistema Invierte.pe como "paso a desnivel elevado (puente vehicular)". Sin embargo, a partir del 30 de enero de 2026 —cuando la marcha blanca colapsó el tráfico y generó el primer gran rechazo público— la MML comenzó a usar el nombre "Nueva Vía Rápida Javier Prado." El cambio no tiene respaldo técnico ni legal: el nombre en Invierte.pe nunca cambió. Es una decisión de comunicación bajo presión ciudadana.",
+    archivo: "https://drive.google.com/file/d/1ZuoXnd27_K5I15ngG94iUZZlnpTJ3wt5/view?usp=drive_link"
+  },
+  {
+    titulo: "CONCLUSIÓN",
+    analisis: "Un candidato presidencial que siendo alcalde impulsó un proyecto de S/ 269 millones con diagnóstico territorial de otro distrito, evaluación ambiental de otra avenida, análisis de tráfico copiado de Ate, sin evaluación real de alternativas, con fines inmobiliarios explícitos en el Marco Lógico, sin opinión técnica de la ATU y con afirmaciones falsas sobre el respaldo vecinal — tiene un problema serio de credibilidad en gestión pública. No es un error técnico: es un patrón que atraviesa todos los tomos del expediente.",
+    archivo: null,
+    esConclusion: true
+  }
+];
+
+const PERFIL_PERSHING = [
+  {
+    titulo: "Declaración del GG vs. datos reales de tráfico",
+    analisis: "El GG declaró en televisión que a partir de 7,000 veh/hora la semaforización no funciona. Las tablas del propio perfil muestran 4,283, 4,562 y 4,439 veh/hora en las intersecciones críticas — ninguna supera el 65% del umbral que él mismo fijó. Adicionalmente, el perfil reconoce que la saturación semafórica "se debe a tener muchas fases" — un problema de gestión, no de volumen. Se propone un viaducto de ~S/ 180 millones para resolver un problema de reprogramación semafórica.",
+    archivo: "https://drive.google.com/file/d/1ozJZgmnYvsK_gqmgPN4St0v7HS_JDZfj/view?usp=drive_link"
+  },
+  {
+    titulo: "HCM: volúmenes que no justifican el viaducto",
+    analisis: "El perfil de Pershing registra 37,704 vehículos diarios —por debajo del rango de 50,000–80,000 veh/día que el HCM establece para arteriales urbanas gestionadas en superficie— y volúmenes horarios de 4,283 a 4,967 veh/hora por intersección, lejos del umbral de saturación estructural del HCM. El propio documento diagnostica el problema como exceso de fases semafóricas. Sin embargo propone un viaducto de casi S/ 300 millones.",
+    archivo: "https://drive.google.com/file/d/1PIWpGbvxlEna1xlifO3UCKozZY3CUiQu/view?usp=drive_link"
+  },
+  {
+    titulo: "Respaldo vecinal declarado sin sustento (texto copiado de Begonias)",
+    analisis: "El perfil declara que "el proyecto ha generado una respuesta favorable y positiva de los residentes del distrito." No existe ningún mecanismo de consulta formal, ninguna encuesta documentada. La misma frase aparece en el perfil de Begonias — copiada textualmente — lo que confirma que es un texto genérico de plantilla. La oposición vecinal organizada y la postura del MSI contradicen esta afirmación de manera verificable y pública.",
+    archivo: "https://drive.google.com/file/d/1qTL0pp3DzIzNT4c0BJuD5arYHWAP23t_/view?usp=drive_link"
+  },
+  {
+    titulo: "Descripción de zona equivocada: San Isidro con talleres de mecánica",
+    analisis: "El perfil describe la zonificación de San Isidro mencionando como usos comerciales predominantes: talleres de mecánica, tiendas con venta de vehículos y motos. San Isidro es el principal distrito financiero y residencial de Lima, con zonificación RDM y CZ. Esta descripción corresponde a otro distrito —probablemente Lince o Jesús María— y fue copiada sin adaptar.",
+    archivo: "https://drive.google.com/file/d/1JSrb1d4vPGXctp6iKKgo7-YPDN64yXoA/view?usp=drive_link"
+  },
+  {
+    titulo: "San Isidro calificado como «asentamiento en zona de alto peligro»",
+    analisis: "El análisis de vulnerabilidad concluye que el desarrollo urbano de San Isidro ocupa "sectores altamente peligrosos" y que el proyecto compromete "seriamente la seguridad física del asentamiento ante desastres." Llamar "asentamiento" al distrito financiero más consolidado de Lima —sede de embajadas, bancos internacionales y edificios corporativos— solo tiene una explicación: este texto fue copiado de un estudio de vulnerabilidad de una zona periférica.",
+    archivo: "https://drive.google.com/file/d/1EaJbD86YD42w83ApoB-Xo4QzHiMAb3-E/view?usp=drive_link"
+  },
+  {
+    titulo: "Cambio de nombre: de «viaducto» a «Nueva Vía Rápida»",
+    analisis: "A partir del 30 de enero de 2026 —cuando la marcha blanca colapsó el tráfico— la MML comenzó a usar el nombre "Nueva Vía Rápida Javier Prado" en sus comunicados oficiales. El término "viaducto" desapareció progresivamente. El 10 de febrero, el comunicado de suspensión ya solo habla de "Nueva Vía Rápida." El nombre en Invierte.pe nunca cambió. Es una decisión de comunicación bajo presión ciudadana.",
+    archivo: "https://drive.google.com/file/d/1ZuoXnd27_K5I15ngG94iUZZlnpTJ3wt5/view?usp=drive_link"
+  },
+  {
+    titulo: "CONCLUSIÓN",
+    analisis: "Ambos perfiles comparten el mismo patrón: texto copiado de otros proyectos sin adaptar, diagnósticos territoriales de distritos equivocados, afirmaciones de respaldo vecinal sin sustento, y objetivos que benefician la revalorización inmobiliaria con recursos públicos. Un candidato presidencial que firmó y promovió proyectos de casi S/ 600 millones con estos niveles de irregularidad tiene un expediente que lo acompañará en campaña. No son errores aislados: son un patrón sistemático documentado.",
+    archivo: null,
+    esConclusion: true
+  }
+];
+
+function buildPerfil(datos, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  datos.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'pf-card' + (item.esConclusion ? ' conclusion' : '');
+    const labelTxt = item.esConclusion ? 'Conclusión' : 'Hallazgo documentado';
+    const labelCls = item.esConclusion ? 'pf-label concl' : 'pf-label';
+    let btns = '';
+    if (item.archivo) {
+      btns += `<a class="doc-btn ready" href="${item.archivo}" target="_blank" rel="noopener" style="margin-right:8px;">${DL} Descargar documento</a>`;
+    }
+    if (item.archivo2) {
+      btns += `<a class="doc-btn ready" href="${item.archivo2}" target="_blank" rel="noopener">${DL} Documento 2</a>`;
+    }
+    card.innerHTML = `
+      <div class="${labelCls}">${labelTxt}</div>
+      <div class="pf-titulo">${item.titulo}</div>
+      <div class="pf-analysis">${item.analisis}</div>
+      ${btns ? `<div style="display:flex;gap:8px;flex-wrap:wrap;">${btns}</div>` : ''}
+    `;
+    container.appendChild(card);
+  });
+}
+
+buildPerfil(PERFIL_BEGONIAS, 'perfil-begonias');
+buildPerfil(PERFIL_PERSHING, 'perfil-pershing');
+
 </script>
 
 <!-- ── WHATSAPP BANNER ── -->
