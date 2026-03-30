@@ -7,17 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:      #0c0d0f;
-    --surface: #13151a;
-    --border:  #222530;
-    --border2: #2e3340;
-    --text:    #e8eaf0;
-    --text2:   #8b90a0;
-    --text3:   #50556a;
-    --gold:    #c9a84c;
-    --gold2:   #e8c96a;
-    --blue2:   #7aadde;
-    --line:    #191c28;
+    --bg:      #12141a;
+    --surface: #1c1f28;
+    --border:  #2d3142;
+    --border2: #3a3f55;
+    --text:    #eceef5;
+    --text2:   #a8adc0;
+    --text3:   #6b7090;
+    --gold:    #d4b05a;
+    --gold2:   #ecd47a;
+    --blue2:   #8fbde8;
+    --line:    #22263a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; min-height: 100vh; }
@@ -37,9 +37,10 @@
   /* TABS */
   .tabs { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 32px; }
   .tabs-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 0; flex-wrap: wrap; }
-  .tab { background: var(--bg); border: 1px solid var(--border2); color: var(--text2); font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 32px; cursor: pointer; transition: all 0.15s ease; margin: 12px 8px 12px 0; font-weight: 500; }
-  .tab:hover { border-color: var(--text2); color: var(--text); }
-  .tab.active { background: #2e3340; border-color: #4a4f62; color: #ffffff; font-weight: 700; }
+  .tab { background: #1e2130; border: 3px solid rgba(255,255,255,0.55); color: #d0d4e4; font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; padding: 11px 32px; cursor: pointer; transition: all 0.12s ease; margin: 12px 8px 12px 0; font-weight: 600; box-shadow: 0 3px 0 #0c0e14; border-radius: 3px; }
+  .tab:hover { border-color: var(--blue2); color: #ffffff; background: #252a3a; box-shadow: 0 3px 0 #0c0e14; }
+  .tab:active { transform: translateY(2px); box-shadow: 0 1px 0 #0c0e14, inset 0 2px 4px rgba(0,0,0,0.5); }
+  .tab.active { background: #2e4068; border: 3px solid #ffffff; color: #ffffff; font-weight: 700; box-shadow: 0 3px 0 #0a1428; }
 
   /* MAIN */
   main { max-width: 960px; margin: 0 auto; padding: 48px 32px 80px; }
@@ -64,21 +65,21 @@
   .timeline::before { content: ''; position: absolute; left: 90px; top: 0; bottom: 0; width: 1px; background: var(--border); }
   .tl-item { display: flex; margin-bottom: 4px; }
   .tl-date-col { width: 90px; flex-shrink: 0; padding-top: 20px; padding-right: 20px; text-align: right; }
-  .tl-date { font-size: 12px; color: var(--text); line-height: 1.6; font-weight: 500; }
+  .tl-date { font-size: 12px; color: var(--text2); line-height: 1.6; font-weight: 600; background: var(--surface); padding: 4px 6px; border-radius: 2px; }
   .tl-dot-col { width: 0; flex-shrink: 0; display: flex; justify-content: center; }
   .tl-dot { width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--bg); margin-top: 24px; position: relative; z-index: 1; left: -4.5px; flex-shrink: 0; }
   .tl-content-col { flex: 1; padding: 12px 0 12px 24px; }
-  .tl-card { background: var(--surface); border: 1px solid var(--border); padding: 16px 18px; transition: border-color 0.15s; }
-  .tl-card:hover { border-color: var(--border2); }
+  .tl-card { background: #22263a; border: 1px solid var(--border); padding: 16px 18px; transition: border-color 0.15s; border-radius: 2px; }
+  .tl-card:hover { border-color: rgba(212,176,90,0.4); }
   .tl-card-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
   .tl-tipo { font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 7px; border-radius: 2px; flex-shrink: 0; margin-top: 3px; }
   .tipo-b  { background: rgba(74,127,212,0.15);  color: var(--blue2); }
   .tipo-p  { background: rgba(201,168,76,0.15);  color: var(--gold2); }
   .tipo-g  { background: rgba(138,111,212,0.15); color: #b09de8; }
-  .tl-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; line-height: 1.35; color: var(--text); flex: 1; }
-  .tl-desc  { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 12px; }
+  .tl-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; line-height: 1.35; color: #d4b05a; flex: 1; }
+  .tl-desc  { font-size: 13px; color: #b8bccf; line-height: 1.8; margin-bottom: 12px; }
   .tl-meta  { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 12px; }
-  .tl-meta span { font-size: 12px; color: var(--text3); }
+  .tl-meta span { font-size: 12px; color: #8890aa; }
   .tl-meta span strong { font-weight: 700; color: var(--gold); }
   .tl-meta span.monto strong { font-size: 14px; color: #fff; font-weight: 700; }
 
@@ -92,12 +93,12 @@
   .perfil-section { margin-top: 60px; padding-top: 32px; border-top: 2px solid var(--border2); }
   .perfil-section-title { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
   .perfil-section-sub { font-size: 11px; color: var(--text3); letter-spacing: 0.08em; margin-bottom: 28px; }
-  .pf-card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid #d94f4f; padding: 20px 22px; margin-bottom: 10px; transition: border-color 0.15s; }
+  .pf-card { background: #22263a; border: 1px solid var(--border); border-left: 3px solid #d94f4f; padding: 20px 22px; margin-bottom: 10px; transition: border-color 0.15s; }
   .pf-card:hover { border-color: var(--border2); border-left-color: #d94f4f; }
   .pf-card.conclusion { border-left-color: var(--gold); background: rgba(201,168,76,0.04); }
   .pf-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: #d97b4f; margin-bottom: 8px; font-weight: 600; }
   .pf-label.concl { color: var(--gold); }
-  .pf-titulo { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+  .pf-titulo { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: #d4b05a; margin-bottom: 10px; line-height: 1.3; }
   .pf-analysis { font-size: 12px; color: var(--text2); line-height: 1.85; margin-bottom: 14px; }
 
   /* GESTIONES DOC NOTE */
@@ -113,12 +114,23 @@
   .wa-link-url  { font-family: 'DM Mono', monospace; font-size: 10px; color: #25D366; letter-spacing: 0.05em; }
 
   @media (max-width: 600px) {
-    header, .tabs, main, .wa-footer { padding-left: 16px; padding-right: 16px; }
+    header, .tabs, main, .wa-footer { padding-left: 14px; padding-right: 14px; }
     .timeline::before { left: 0; }
     .tl-date-col { display: none; }
     .tl-dot { left: -4.5px; }
-    .tl-content-col { padding-left: 16px; }
-    .tab { padding: 10px 16px; font-size: 11px; }
+    .tl-content-col { padding-left: 14px; }
+    .tl-tipo { font-size: 9px; padding: 4px 8px; }
+    .tl-title { font-size: 15px; }
+    .tl-desc { font-size: 13px; line-height: 1.75; }
+    .tl-meta span { font-size: 12px; }
+    .tl-meta span strong { font-size: 13px; }
+    .tl-card { padding: 14px 14px; }
+    .ph-name { font-size: 22px; }
+    .tabs-inner { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+    .tabs-inner::-webkit-scrollbar { height: 3px; }
+    .tabs-inner::-webkit-scrollbar-track { background: transparent; }
+    .tabs-inner::-webkit-scrollbar-thumb { background: var(--border2); }
+    .tab { flex-shrink: 0; margin: 10px 6px 10px 0; padding: 9px 14px; font-size: 11px; letter-spacing: 0.06em; border-width: 2px; }
   }
 </style>
 </head>
@@ -151,7 +163,7 @@
     <button class="tab" data-panel="pershing">Pershing</button>
     <button class="tab" data-panel="perfil-begonias-panel">Perfil Begonias</button>
     <button class="tab" data-panel="perfil-pershing-panel">Perfil Pershing</button>
-    <button class="tab" data-panel="gestiones">Gestiones del Colectivo</button>
+    <button class="tab" data-panel="gestiones">Reuniones</button>
   </div>
 </div>
 
@@ -166,11 +178,6 @@
       <div class="ph-sub">Distrito de Lince · Calle Las Begonias – Av. Arenales</div>
     </div>
     <div class="timeline" id="tl-begonias"></div>
-    <div class="perfil-section">
-      <div class="perfil-section-title">Análisis del Perfil de Inversión</div>
-      <div class="perfil-section-sub">Hallazgos documentados con respaldo en los tomos del expediente técnico</div>
-      <div id="perfil-begonias"></div>
-    </div>
   </div>
 
   <!-- PANEL PERSHING -->
@@ -181,19 +188,14 @@
       <div class="ph-sub">Distrito de San Isidro · Av. Javier Prado / Av. Sánchez Carrión</div>
     </div>
     <div class="timeline" id="tl-pershing"></div>
-    <div class="perfil-section">
-      <div class="perfil-section-title">Análisis del Perfil de Inversión</div>
-      <div class="perfil-section-sub">Hallazgos documentados con respaldo en los tomos del expediente técnico</div>
-      <div id="perfil-pershing"></div>
-    </div>
   </div>
 
   <!-- PANEL GESTIONES -->
   <div class="panel" id="panel-gestiones">
     <div class="project-header gestiones">
       <div class="ph-cui">Colectivo Ciudadanía Informada SI</div>
-      <div class="ph-name g">Gestiones del Colectivo</div>
-      <div class="ph-sub">Reuniones, participaciones y acciones ante organismos</div>
+      <div class="ph-name g">Reuniones</div>
+      <div class="ph-sub">Reuniones del colectivo vecinal ante organismos e instituciones</div>
     </div>
     <div class="timeline" id="tl-gestiones"></div>
   </div>
@@ -281,17 +283,17 @@ const PERSHING = [
 // DATOS — GESTIONES
 // ══════════════════════════════════════════════════════════════
 const GESTIONES = [
-  { fecha:"24/09/2025", lugar:"MSI Olivar", organismo:"MSI", funcionario:"Alcaldesa y funcionarios", tema:"Solicitud presencial y carta al MSI solicitando socialización", documento:"Carta al MSI", archivo:"https://drive.google.com/file/d/1MJaa6ctdBvj96Cn8SjYoLxV8ZNerfMA-/view?usp=drive_link", doc2:"PPT de la MSI", archivo2:"https://drive.google.com/file/d/1tLJEdyzX8I0ybMSwk9ZquKrQPK9NIKjN/view?usp=drive_link" },
+  { fecha:"24/09/2025", lugar:"MSI Olivar", organismo:"MSI", funcionario:"Alcaldesa y funcionarios", tema:"Entregamos carta solicitando socialización a la Alcaldía", documento:"Carta al MSI", archivo:"https://drive.google.com/file/d/1MJaa6ctdBvj96Cn8SjYoLxV8ZNerfMA-/view?usp=drive_link", doc2:"PPT del MSI", archivo2:"https://drive.google.com/file/d/1tLJEdyzX8I0ybMSwk9ZquKrQPK9NIKjN/view?usp=drive_link" },
   { fecha:"15/10/2025", lugar:"Swiss Hotel", organismo:"INVERMET / MSI", funcionario:"Funcionarios de INVERMET y contratista de Begonias", tema:"Presentación del proyecto Begonias (solo expuso el contratista)", documento:"Lista de preguntas formuladas a INVERMET", archivo:"https://drive.google.com/file/d/1O9sISuo9Vax0XRDQbpcm_EhS4m9ftp6X/view?usp=drive_link", doc2:null, archivo2:null },
-  { fecha:"20/11/2025", lugar:"Nueva Acrópolis", organismo:"INVERMET / TYPSA", funcionario:"ANULADO", tema:"ANULADO: queja por aforo de 80 personas", documento:null, archivo:null, doc2:null, archivo2:null },
-  { fecha:"15/12/2025", lugar:"Local GR", organismo:"INVERMET / ECR", funcionario:"Personal de INVERMET ECR y 1 representante de ATU", tema:"Exposición del proyecto, preguntas no respondidas, pocas personas, plantón en los exteriores. Se registra un acta donde no registran todas las preguntas ni respuestas", documento:null, archivo:null, doc2:null, archivo2:null },
-  { fecha:"17/12/2025", lugar:"Colegio San Agustín", organismo:"INVERMET / TYPSA", funcionario:"ANULADO", tema:"ANULADO: a pedido de INVERMET debido a los eventos del 15", documento:null, archivo:null, doc2:null, archivo2:null },
-  { fecha:"07/01/2026", lugar:"MSI Tamayo", organismo:"MSI", funcionario:"Alcaldesa y funcionarios", tema:"Indicar que está buscando apoyarnos logrando reunión con Reggiardo que regresa de Europa (asistieron 3 vecinos)", documento:null, archivo:null, doc2:null, archivo2:null },
-  { fecha:"21/01/2026", lugar:"Colegio San Agustín", organismo:"INVERMET / TYPSA", funcionario:"Funcionarios INVERMET (muchos) / TYPSA (muchos)", tema:"Exposición del proyecto. Vecinos preguntaron y objetaron oponiéndose al proyecto", documento:"Folleto INVERMET", archivo:null, doc2:null, archivo2:null },
-  { fecha:"26/01/2026", lugar:"Swiss Hotel", organismo:"INVERMET / MSI", funcionario:"INVERMET no se presentó", tema:"El grupo expuso PPT con preguntas", documento:"PDF de preguntas", archivo:"https://drive.google.com/file/d/1q6uxo3ATa9JY9i7GeOVDBZiCZg6IiIC_/view?usp=drive_link", doc2:null, archivo2:null },
-  { fecha:"03/02/2026", lugar:"MSI Tamayo", organismo:"MSI", funcionario:"Alcaldesa y funcionarios", tema:"Indicar que está buscando apoyarnos logrando reunión con Reggiardo (asistieron 4 vecinas)", documento:null, archivo:null, doc2:null, archivo2:null },
-  { fecha:"10/02/2026", lugar:"Municipalidad de Lima", organismo:"MML / INVERMET / MSI", funcionario:"Reggiardo, Nancy V., Gerente de INVERMET, Gerente de la MML y otros funcionarios con 6 vecinos de San Isidro", tema:"Se expuso la maqueta conceptual de Cañón Urbano", documento:"Preguntas del 26 de enero con agregado", archivo:"https://drive.google.com/file/d/1q6uxo3ATa9JY9i7GeOVDBZiCZg6IiIC_/view?usp=drive_link", doc2:null, archivo2:null },
-  { fecha:"26/03/2026", lugar:"INVERMET Lima", organismo:"INVERMET / MSI", funcionario:"GG INVERMET, técnicos INVERMET, Alcaldesa MSI y sus técnicos, 6 vecinos del distrito", tema:"INVERMET realizó exposición. Vecinos y MSI cuestionaron los puntos expuestos. Se indicó la conformación de comisión.", documento:"Informe a vecinos en chat Ciudadanía Informada", archivo:"https://drive.google.com/file/d/1p6GwA9wyVbxtW05tVKVU2GnYSoOD3p0U/view?usp=drive_link", doc2:null, archivo2:null }
+  { fecha:"20/11/2025", lugar:"Nueva Acrópolis", organismo:"INVERMET / TYPSA", funcionario:"ANULADO", tema:"ANULADO: aforo de 80 personas", documento:null, archivo:null, doc2:null, archivo2:null },
+  { fecha:"15/12/2025", lugar:"Local GR", organismo:"INVERMET / ECR", funcionario:"Personal de INVERMET ECR y 1 representante de ATU", tema:"1er Taller Participativo Pershing: pocas personas, plantón en los exteriores. Se registra un acta donde no registran todas las preguntas ni respuestas. Oposición unánime.", documento:null, archivo:null, doc2:null, archivo2:null },
+  { fecha:"17/12/2025", lugar:"Colegio San Agustín", organismo:"INVERMET / TYPSA", funcionario:"ANULADO", tema:"ANULADO: a pedido de INVERMET", documento:null, archivo:null, doc2:null, archivo2:null },
+  { fecha:"07/01/2026", lugar:"MSI Tamayo", organismo:"MSI", funcionario:"Alcaldesa y funcionarios", tema:"Nos reunimos para preguntar acciones de la MSI referente al proyecto (ofrecen organizar reunión con el Alcalde de Lima)", documento:null, archivo:null, doc2:null, archivo2:null },
+  { fecha:"21/01/2026", lugar:"Colegio San Agustín", organismo:"INVERMET / TYPSA", funcionario:"Funcionarios INVERMET / TYPSA", tema:"1er Taller Participativo Begonias: vecinos objetan el proyecto.", documento:"Folleto INVERMET", archivo:"https://drive.google.com/file/d/1MPnhQ6IhKjbqLkhw5C7cyh1ibfU_QJJW/view?usp=drive_link", doc2:null, archivo2:null },
+  { fecha:"26/01/2026", lugar:"Swiss Hotel", organismo:"INVERMET / MSI", funcionario:"INVERMET no se presentó", tema:"Se expuso a los vecinos las preguntas elaboradas para INVERMET", documento:"PDF de preguntas", archivo:"https://drive.google.com/file/d/1q6uxo3ATa9JY9i7GeOVDBZiCZg6IiIC_/view?usp=drive_link", doc2:null, archivo2:null },
+  { fecha:"03/02/2026", lugar:"MSI Tamayo", organismo:"MSI", funcionario:"Alcaldesa y funcionarios", tema:"Nos reunimos con la alcaldesa para confirmar su ofrecimiento del 26 de enero: gestionar reunión con el alcalde de Lima o iniciar acción de amparo a través de la Procuraduría.", documento:null, archivo:null, doc2:null, archivo2:null },
+  { fecha:"10/02/2026", lugar:"Municipalidad de Lima", organismo:"MML / INVERMET / MSI", funcionario:"Reggiardo, Nancy V., Gerente de INVERMET, Gerente de la MML y otros funcionarios con 6 vecinos de San Isidro", tema:"Presentamos ante el alcalde y funcionarios nuestras objeciones al proyecto, usando como apoyo una maqueta conceptual de ambos proyectos.", documento:"Preguntas del 26 de enero con agregado", archivo:"https://drive.google.com/file/d/1bOcIca1gmT36sKbAFOlJiP_pgxOKh2ku/view?usp=drive_link", doc2:null, archivo2:null },
+  { fecha:"26/03/2026", lugar:"INVERMET Lima", organismo:"INVERMET / MSI", funcionario:"GG INVERMET, técnicos INVERMET, Alcaldesa MSI y sus técnicos, 6 vecinos del distrito", tema:"INVERMET expuso el mismo proyecto. Nosotros y la MSI cuestionamos los puntos presentados. El gerente general de INVERMET indicó la conformación de una comisión.", documento:"Informe a vecinos en chat Ciudadanía Informada", archivo:"https://drive.google.com/file/d/1p6GwA9wyVbxtW05tVKVU2GnYSoOD3p0U/view?usp=drive_link", doc2:null, archivo2:null }
 ];
 
 // ══════════════════════════════════════════════════════════════
@@ -422,9 +424,7 @@ function buildPerfil(datos, containerId) {
 buildTimeline(BEGONIAS,  'tl-begonias',  'tipo-b', '#7aadde');
 buildTimeline(PERSHING,  'tl-pershing',  'tipo-p', '#e8c96a');
 buildGestiones();
-buildPerfil(PERFIL_BEGONIAS, 'perfil-begonias');
 buildPerfil(PERFIL_BEGONIAS, 'perfil-begonias-tab');
-buildPerfil(PERFIL_PERSHING, 'perfil-pershing');
 buildPerfil(PERFIL_PERSHING, 'perfil-pershing-tab');
 
 // ══════════════════════════════════════════════════════════════
