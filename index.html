@@ -109,6 +109,7 @@
   .pf-analysis { font-size: 12px; color: var(--text2); line-height: 1.85; margin-bottom: 14px; }
 
   /* GESTIONES DOC NOTE */
+  .tl-organismo { font-size: 11px; color: #b09de8; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
   .tl-doc-note { font-size: 11px; color: var(--text2); border-left: 2px solid var(--border2); padding-left: 10px; margin-bottom: 10px; }
 
   /* WHATSAPP FOOTER */
@@ -126,7 +127,10 @@
     .tl-date-col { display: none; }
     .tl-dot { left: -4.5px; }
     .tl-content-col { padding-left: 14px; }
-    .tl-tipo { font-size: 9px; padding: 4px 8px; }
+    .tl-tipo { font-size: 14px; padding: 5px 10px; font-weight: 700; letter-spacing: 0.08em; color: #ffffff !important; }
+    .tipo-b { background: rgba(74,127,212,0.25); color: #8fbde8; }
+    .tipo-p { background: rgba(201,168,76,0.25); color: #ecd47a; }
+    .tipo-g { background: rgba(138,111,212,0.25); color: #c4b0f0; }
     .tl-title { font-size: 15px; }
     .tl-desc { font-size: 13px; line-height: 1.75; }
     .tl-meta span { font-size: 12px; }
@@ -357,7 +361,7 @@ function buildTimeline(datos, containerId, tipoClass, dotColor) {
       <div class="tl-content-col">
         <div class="tl-card">
           <div class="tl-card-top">
-            <span class="tl-tipo ${tipoClass}">${d}/${m}/${y}</span>
+            <span class="tl-tipo ${tipoClass}" style="font-size:13px;font-weight:700;">${d}/${m}/${y}</span>
             <div class="tl-title">${ev.titulo}</div>
           </div>
           <div class="tl-desc">${ev.desc}</div>
@@ -394,9 +398,10 @@ function buildGestiones() {
       <div class="tl-content-col">
         <div class="tl-card">
           <div class="tl-card-top">
-            <span class="tl-tipo tipo-g">${ev.organismo}</span>
+            <span class="tl-tipo tipo-g">${d}/${m}/${y}</span>
             <div class="tl-title">${ev.tema}</div>
           </div>
+          <div class="tl-organismo">${ev.organismo}</div>
           ${meta}${docNote}${btns}
         </div>
       </div>`;
